@@ -1,0 +1,287 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0f2340;
+  --color-ink-2: #19335a;
+  --color-lapis: #1f56a3;
+  --color-wash: #e9eff8;
+  --color-gold: #e3b041;
+  --color-gold-deep: #8a5f0e;
+  --color-paper: #f6f8fb;
+  --color-line: #d6dfeb;
+  --color-muted: #4d5c76;
+  --color-ok: #17734f;
+  --color-bad: #b3261e;
+
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Literata Variable", Georgia, "Times New Roman", serif;
+  --font-arabic: "Amiri", "Noto Naskh Arabic", "Geeza Pro", serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    line-height: 1.14;
+    text-wrap: balance;
+  }
+  p,
+  li {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-lapis);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .on-ink :focus-visible {
+    outline-color: var(--color-gold);
+  }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility wrap {
+  width: 100%;
+  max-width: 74rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 640px) {
+    padding-inline: 2rem;
+  }
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.7rem 1.35rem;
+    border-radius: 0.7rem;
+    font-weight: 650;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-align: center;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    cursor: pointer;
+  }
+  .btn-gold {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+  .btn-gold:hover {
+    background: #eebf58;
+  }
+  .btn-ink {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .btn-ink:hover {
+    background: var(--color-ink-2);
+  }
+  .btn-line {
+    border: 1.5px solid var(--color-ink);
+    color: var(--color-ink);
+  }
+  .btn-line:hover {
+    background: var(--color-wash);
+  }
+  .btn-line-light {
+    border: 1.5px solid rgb(255 255 255 / 0.45);
+    color: #fff;
+  }
+  .btn-line-light:hover {
+    border-color: #fff;
+    background: rgb(255 255 255 / 0.08);
+  }
+  .btn[disabled] {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .link {
+    color: var(--color-lapis);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .link:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .field {
+    display: block;
+    width: 100%;
+    min-height: 2.9rem;
+    padding: 0.6rem 0.8rem;
+    border: 1.5px solid var(--color-line);
+    border-radius: 0.6rem;
+    background: #fff;
+    color: var(--color-ink);
+    font-size: 1rem;
+  }
+  .field:hover {
+    border-color: #b9c6d8;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-lapis);
+    box-shadow: 0 0 0 3px rgb(31 86 163 / 0.18);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-bad);
+  }
+  .label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  /* Long-form content rendered from the content files */
+  .prose-q > * + * {
+    margin-top: 1.05rem;
+  }
+  .prose-q h2 {
+    margin-top: 2.75rem;
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 1.95rem);
+  }
+  .prose-q h3 {
+    margin-top: 1.75rem;
+    font-size: 1.25rem;
+  }
+  .prose-q p,
+  .prose-q li {
+    max-width: 68ch;
+  }
+  .prose-q ul,
+  .prose-q ol {
+    padding-left: 1.3rem;
+  }
+  .prose-q ul {
+    list-style: disc;
+  }
+  .prose-q ol {
+    list-style: decimal;
+  }
+  .prose-q li + li {
+    margin-top: 0.45rem;
+  }
+  .prose-q li::marker {
+    color: var(--color-gold-deep);
+    font-weight: 700;
+  }
+
+  .tbl-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--color-line);
+    border-radius: 0.8rem;
+    background: #fff;
+  }
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.97rem;
+  }
+  .tbl caption {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .tbl th,
+  .tbl td {
+    padding: 0.7rem 1rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .tbl thead th {
+    background: var(--color-wash);
+    font-weight: 650;
+    white-space: nowrap;
+  }
+  .tbl tbody tr + tr {
+    border-top: 1px solid var(--color-line);
+  }
+  .tbl tbody th {
+    font-weight: 600;
+  }
+
+  /* The mihrab arch: the one shape this site owns. Used for the lesson board and the trial form. */
+  .arch {
+    border-radius: 50% 50% 1.1rem 1.1rem / 9.5rem 9.5rem 1.1rem 1.1rem;
+  }
+  @media (max-width: 480px) {
+    .arch {
+      border-radius: 50% 50% 1rem 1rem / 6.5rem 6.5rem 1rem 1rem;
+    }
+  }
+
+  /* Eight-point star lattice, used faintly on the ink sections */
+  .lattice {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.055' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Teacher's pen: the underline draws itself once when the hero loads */
+  .pen {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: pen 0.9s ease-out forwards;
+  }
+  .pen-2 {
+    animation-delay: 0.9s;
+  }
+  .note-in {
+    opacity: 0;
+    animation: note 0.5s ease-out forwards;
+  }
+  @keyframes pen {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes note {
+    to {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pen {
+      stroke-dashoffset: 0;
+    }
+    .note-in {
+      opacity: 1;
+    }
+  }
+}
